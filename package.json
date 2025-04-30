@@ -34,6 +34,6 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "@lottiefiles/lottie-player": "^2.0.0"
+    "@lottiefiles/lottie-player": "^2.0.12"
   }
 }

@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -28,20 +27,9 @@
         />
         <meta property="og:type" content="website" />
 
-        <!-- Lottie Player Script -->
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
-        <!-- Alpine.js -->
-        <script
-            defer
-            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
-        ></script>
-
-        <!-- Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
-
-        <!-- No custom CSS needed since we're using Tailwind -->
+        <!-- Import the app module -->
         <link rel="stylesheet" href="./src/styles.css" />
+        <script type="module" src="./src/app.ts"></script>
     </head>
     <body x-data="imageLoader" class="m-0 p-0 overflow-hidden font-sans">
         <div
@@ -79,57 +67,5 @@
                 />
             </div>
         </div>
-
-        <script>
-            document.addEventListener("alpine:init", () => {
-                Alpine.data("imageLoader", () => ({
-                    lottieUrl: "",
-                    imageUrl: "",
-                    bgColor: "#ffffff",
-                    imageLoaded: false,
-                    showImage: false,
-                    minLoadTime: 2000, // Minimum loading time in milliseconds
-                    loadStartTime: 0,
-
-                    init() {
-                        // Parse URL parameters
-                        const urlParams = new URLSearchParams(
-                            window.location.search,
-                        );
-                        this.lottieUrl =
-                            urlParams.get("lottie") ||
-                            "https://assets3.lottiefiles.com/packages/lf20_usmfx6bp.json"; // Default lottie
-                        this.bgColor = urlParams.get("bgcolor") || "#ffffff"; // Default background color
-                        this.imageUrl = urlParams.get("imageurl") || ""; // No default image
-
-                        // Record the start time of loading
-                        this.loadStartTime = Date.now();
-
-                        // If no image URL is provided, wait minimum time then hide loader
-                        if (!this.imageUrl) {
-                            setTimeout(() => {
-                                this.showImage = true;
-                            }, this.minLoadTime);
-                        }
-                    },
-
-                    handleImageLoad() {
-                        this.imageLoaded = true;
-
-                        // Calculate how much time has passed since loading started
-                        const elapsedTime = Date.now() - this.loadStartTime;
-                        const remainingTime = Math.max(
-                            0,
-                            this.minLoadTime - elapsedTime,
-                        );
-
-                        // Wait for the remaining time (if any) before showing the image
-                        setTimeout(() => {
-                            this.showImage = true;
-                        }, remainingTime);
-                    },
-                }));
-            });
-        </script>
     </body>
 </html>
