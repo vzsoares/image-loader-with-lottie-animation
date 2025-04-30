@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>Image Loader with Lottie Animation</title>
+        <meta
+            name="description"
+            content="A simple image loader that displays a Lottie animation while the image is loading."
+        />
+        <meta
+            name="keywords"
+            content="image loader, lottie animation, loading screen"
+        />
+        <meta name="author" content="Image Loader App" />
+
+        <!-- Open Graph meta tags for social sharing -->
+        <meta
+            property="og:title"
+            content="Image Loader with Lottie Animation"
+        />
+        <meta
+            property="og:description"
+            content="A simple image loader with customizable Lottie animations."
+        />
+        <meta property="og:type" content="website" />
+
+        <!-- Lottie Player Script -->
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+        <!-- Alpine.js -->
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- No custom CSS needed since we're using Tailwind -->
+        <link rel="stylesheet" href="./src/styles.css" />
+    </head>
+    <body x-data="imageLoader" class="m-0 p-0 overflow-hidden font-sans">
+        <div
+            class="w-screen h-screen flex justify-center items-center relative"
+            :style="'background-color: ' + bgColor"
+        >
+            <div
+                class="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10 transition-opacity duration-500"
+                x-show="!showImage"
+                x-transition:leave="transition-opacity duration-500"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+            >
+                <lottie-player
+                    :src="lottieUrl"
+                    background="transparent"
+                    speed="1"
+                    class="w-[300px] h-[300px]"
+                    loop
+                    autoplay
+                ></lottie-player>
+            </div>
+            <div
+                class="absolute top-0 left-0 w-full h-full flex justify-center items-center z-5"
+            >
+                <img
+                    :src="imageUrl"
+                    alt="Loaded image"
+                    x-show="showImage"
+                    @load="handleImageLoad"
+                    class="max-w-full max-h-full object-contain opacity-0"
+                    x-transition:enter="transition-opacity duration-500"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                />
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("imageLoader", () => ({
+                    lottieUrl: "",
+                    imageUrl: "",
+                    bgColor: "#ffffff",
+                    imageLoaded: false,
+                    showImage: false,
+                    minLoadTime: 2000, // Minimum loading time in milliseconds
+                    loadStartTime: 0,
+
+                    init() {
+                        // Parse URL parameters
+                        const urlParams = new URLSearchParams(
+                            window.location.search,
+                        );
+                        this.lottieUrl =
+                            urlParams.get("lottie") ||
+                            "https://assets3.lottiefiles.com/packages/lf20_usmfx6bp.json"; // Default lottie
+                        this.bgColor = urlParams.get("bgcolor") || "#ffffff"; // Default background color
+                        this.imageUrl = urlParams.get("imageurl") || ""; // No default image
+
+                        // Record the start time of loading
+                        this.loadStartTime = Date.now();
+
+                        // If no image URL is provided, wait minimum time then hide loader
+                        if (!this.imageUrl) {
+                            setTimeout(() => {
+                                this.showImage = true;
+                            }, this.minLoadTime);
+                        }
+                    },
+
+                    handleImageLoad() {
+                        this.imageLoaded = true;
+
+                        // Calculate how much time has passed since loading started
+                        const elapsedTime = Date.now() - this.loadStartTime;
+                        const remainingTime = Math.max(
+                            0,
+                            this.minLoadTime - elapsedTime,
+                        );
+
+                        // Wait for the remaining time (if any) before showing the image
+                        setTimeout(() => {
+                            this.showImage = true;
+                        }, remainingTime);
+                    },
+                }));
+            });
+        </script>
+    </body>
+</html>
