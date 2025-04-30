@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -27,19 +28,24 @@
         />
         <meta property="og:type" content="website" />
 
-        <!-- Import the app module -->
+        <!-- Styles -->
         <link rel="stylesheet" href="./src/styles.css" />
         <script type="module" src="./src/app.ts"></script>
     </head>
-    <body x-data="imageLoader" class="m-0 p-0 overflow-hidden font-sans">
+    <body
+        x-data="imageLoader"
+        class="m-0 p-0 overflow-hidden font-sans"
+        x-cloak
+    >
         <div
             class="w-screen h-screen flex justify-center items-center relative"
             :style="'background-color: ' + bgColor"
         >
+            <!-- Loader -->
             <div
-                class="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10 transition-opacity duration-500"
+                class="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10"
                 x-show="!showImage"
-                x-transition:leave="transition-opacity duration-500"
+                x-transition:leave="transition-opacity duration-500 ease-in"
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0"
             >
@@ -52,6 +58,8 @@
                     autoplay
                 ></lottie-player>
             </div>
+
+            <!-- Image container -->
             <div
                 class="absolute top-0 left-0 w-full h-full flex justify-center items-center z-5"
             >
@@ -59,13 +67,19 @@
                     :src="imageUrl"
                     alt="Loaded image"
                     x-show="showImage"
-                    @load="handleImageLoad"
-                    class="max-w-full max-h-full object-contain opacity-0"
-                    x-transition:enter="transition-opacity duration-500"
+                    class="max-w-full max-h-full object-contain"
+                    x-transition:enter="transition-opacity duration-500 ease-out"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
                 />
             </div>
         </div>
+
+        <!-- Add this style to prevent FOUC (Flash Of Unstyled Content) -->
+        <style>
+            [x-cloak] {
+                display: none !important;
+            }
+        </style>
     </body>
 </html>
