@@ -15,7 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
         showImage: false,
         minLoadTime: 2000, // Minimum loading time in milliseconds
         loadStartTime: 0,
-        dotLottieInstance: null,
+        dotLottieInstance: new DotLottie({
+            canvas: document.getElementById("") as HTMLCanvasElement,
+        }),
 
         init() {
             console.log("Alpine component initialized");
