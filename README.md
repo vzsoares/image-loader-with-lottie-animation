@@ -7,7 +7,7 @@
 A customizable image loader application with smooth Lottie animations and SVG background patterns. Perfect for enhancing user experience during image loading on websites and web applications.
 
 <p align="center">
-  <img width="460" height="300" src="/public/Image-Loader-with-Lottie-Animation.gif">
+  <img width="800" src="/public/Image-Loader-with-Lottie-Animation.gif">
 </p>
 
 ## ✨ Features
