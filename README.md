@@ -16,7 +16,7 @@ A customizable image loader application with smooth Lottie animations and SVG ba
 
 ## 🚀 Live Webapp
 
-Try it now: [Image Loader with Lottie Animation](https://vzsoares.github.io/image-loader/)
+Try it now: [Image Loader with Lottie Animation](https://vzsoares.github.io/image-loader-with-lottie-animation/?lottie=https%3A%2F%2Flottie.host%2F9e0475c4-a6ea-46bf-b27c-8f8c3e14dc9a%2FAJTA2WRbpB.json&bgcolor=%23ff0000&imageurl=https://cdn.zenhalab.com/assets/images/landscape-placeholder.jpeg&svgurl=https://cdn.zenhalab.com/assets/patterns/qqquad.svg)
 
 ## 🔧 URL Parameters
 
@@ -30,7 +30,7 @@ Customize the loader by adding these parameters to the URL:
 ### Example URL
 
 ```
-https://vzsoares.github.io/image-loader/?lottie=https://lottie.host/9e0475c4-a6ea-46bf-b27c-8f8c3e14dc9a/AJTA2WRbpB.json&bgcolor=%23f5f5f5&imageurl=https://example.com/my-image.jpg&svgurl=https://example.com/pattern.svg
+https://vzsoares.github.io/image-loader-with-lottie-animation/?lottie=https%3A%2F%2Flottie.host%2F9e0475c4-a6ea-46bf-b27c-8f8c3e14dc9a%2FAJTA2WRbpB.json&bgcolor=%23ff0000&imageurl=https://cdn.zenhalab.com/assets/images/landscape-placeholder.jpeg&svgurl=https://cdn.zenhalab.com/assets/patterns/qqquad.svg
 ```
 
 ## 🎮 How It Works
@@ -59,8 +59,8 @@ https://vzsoares.github.io/image-loader/?lottie=https://lottie.host/9e0475c4-a6e
 
 ```bash
 # 1. Clone the repository:
-git clone https://github.com/vzsoares/image-loader.git
-cd image-loader
+git clone https://github.com/vzsoares/image-loader-with-lottie-animation.git
+cd image-loader-with-lottie-animation
 
 # 2. Install dependencies:
 yarn install

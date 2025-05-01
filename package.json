@@ -1,10 +1,10 @@
 {
-    "name": "image-loader-with-lottie",
+    "name": "image-loader-with-lottie-animation",
     "version": "1.0.0",
     "description": "A simple image loader with Lottie animations and SVG background patterns",
     "scripts": {
         "dev": "vite",
-        "build": "vite build --base='/image-loader'",
+        "build": "vite build --base='/image-loader-with-lottie-animation'",
         "preview": "vite preview"
     },
     "keywords": [
@@ -20,7 +20,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/vzsoares/image-loader-with-lottie.git"
+        "url": "https://github.com/vzsoares/image-loader-with-lottie-animation.git"
     },
     "devDependencies": {
         "@tailwindcss/postcss": "^4.0.13",
