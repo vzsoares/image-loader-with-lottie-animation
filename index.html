@@ -49,14 +49,11 @@
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0"
             >
-                <lottie-player
-                    :src="lottieUrl"
-                    background="transparent"
-                    speed="1"
-                    class="w-[300px] h-[300px]"
-                    loop
-                    autoplay
-                ></lottie-player>
+                <!-- Canvas for Lottie animation -->
+                <canvas
+                    id="dotlottie-canvas"
+                    style="width: 300px; height: 300px"
+                ></canvas>
             </div>
 
             <!-- Image container -->

@@ -195,6 +195,11 @@
   dependencies:
     "@lit-labs/ssr-dom-shim" "^1.0.0"
 
+"@lottiefiles/dotlottie-web@^0.44.0":
+  version "0.44.0"
+  resolved "https://registry.yarnpkg.com/@lottiefiles/dotlottie-web/-/dotlottie-web-0.44.0.tgz#3c139677f3e1e1f9fbcee10b55fd9129fb046aa7"
+  integrity sha512-IUWKVciDJI/BMWDWnh7j0Ngd0N8q9ySRAwm84aDqIE07qpmdZ7x1rkIpBaU1yHSNqNYHeh1Rxsl+LC3CY4f0KA==
+
 "@lottiefiles/lottie-player@^2.0.12":
   version "2.0.12"
   resolved "https://registry.yarnpkg.com/@lottiefiles/lottie-player/-/lottie-player-2.0.12.tgz#6fc93b2ef485bdd8f5c8ceb7f91bfcb4e9e8019d"

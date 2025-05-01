@@ -1,12 +1,12 @@
 import Alpine from "alpinejs";
-import "@lottiefiles/lottie-player";
+import { DotLottie } from "@lottiefiles/dotlottie-web";
 
-// Make sure Alpine is defined as a window property to ensure it's globally available
+// Make Alpine available to the window object
 // @ts-ignore
 window.Alpine = Alpine;
 
 document.addEventListener("DOMContentLoaded", () => {
-    // First, register the Alpine data
+    // Register the Alpine data store
     Alpine.data("imageLoader", () => ({
         lottieUrl: "",
         imageUrl: "",
@@ -15,23 +15,29 @@ document.addEventListener("DOMContentLoaded", () => {
         showImage: false,
         minLoadTime: 2000, // Minimum loading time in milliseconds
         loadStartTime: 0,
+        dotLottieInstance: null,
 
         init() {
-            console.log("Alpine component initialized"); // Debug log
+            console.log("Alpine component initialized");
 
             // Parse URL parameters
             const urlParams = new URLSearchParams(window.location.search);
+
+            // Get the Lottie URL from query params or use default
             this.lottieUrl =
                 urlParams.get("lottie") ||
-                "https://assets3.lottiefiles.com/packages/lf20_usmfx6bp.json"; // Default lottie
-            this.bgColor = urlParams.get("bgcolor") || "#ffffff"; // Default background color
-            this.imageUrl = urlParams.get("imageurl") || ""; // No default image
+                "https://lottie.host/9e0475c4-a6ea-46bf-b27c-8f8c3e14dc9a/AJTA2WRbpB.json";
 
-            console.log("Image URL:", this.imageUrl); // Debug log
-            console.log("Lottie URL:", this.lottieUrl); // Debug log
+            this.bgColor = urlParams.get("bgcolor") || "#ffffff";
+            this.imageUrl = urlParams.get("imageurl") || "";
 
-            // Force the component to start with loader visible
-            this.showImage = false;
+            console.log("Image URL:", this.imageUrl);
+            console.log("Lottie URL:", this.lottieUrl);
+
+            // Initialize Lottie animation
+            this.$nextTick(() => {
+                this.initializeLottie();
+            });
 
             // Record the start time of loading
             this.loadStartTime = Date.now();
@@ -40,8 +46,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (this.imageUrl) {
                 const img = new Image();
                 img.src = this.imageUrl;
+
                 img.onload = () => {
                     this.handleImageLoad();
+                };
+
+                img.onerror = () => {
+                    console.error("Error loading image");
+                    // Show an empty screen after min time if image fails
+                    setTimeout(() => {
+                        this.showImage = true;
+                    }, this.minLoadTime);
                 };
             } else {
                 // If no image URL is provided, wait minimum time then hide loader
@@ -51,25 +66,60 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         },
 
+        initializeLottie() {
+            try {
+                const canvas = document.getElementById("dotlottie-canvas");
+                if (!canvas) {
+                    console.error("Canvas element not found");
+                    return;
+                }
+
+                // Create the DotLottie instance
+                this.dotLottieInstance = new DotLottie({
+                    autoplay: true,
+                    loop: true,
+                    canvas: canvas as HTMLCanvasElement,
+                    src: this.lottieUrl,
+                });
+
+                console.log("Lottie animation initialized");
+            } catch (error) {
+                console.error("Error initializing Lottie:", error);
+            }
+        },
+
         handleImageLoad() {
-            console.log("Image loaded"); // Debug log
+            console.log("Image loaded");
             this.imageLoaded = true;
 
             // Calculate how much time has passed since loading started
             const elapsedTime = Date.now() - this.loadStartTime;
             const remainingTime = Math.max(0, this.minLoadTime - elapsedTime);
 
-            console.log(`Waiting ${remainingTime}ms before showing image`); // Debug log
+            console.log(`Waiting ${remainingTime}ms before showing image`);
 
             // Wait for the remaining time (if any) before showing the image
             setTimeout(() => {
                 this.showImage = true;
-                console.log("Image shown"); // Debug log
+
+                // Destroy the Lottie instance when no longer needed
+                if (this.dotLottieInstance) {
+                    try {
+                        this.dotLottieInstance.destroy();
+                    } catch (error) {
+                        console.error(
+                            "Error destroying Lottie instance:",
+                            error,
+                        );
+                    }
+                }
+
+                console.log("Image shown, Lottie destroyed");
             }, remainingTime);
         },
     }));
 
-    // Then start Alpine
+    // Start Alpine
     Alpine.start();
-    console.log("Alpine started"); // Debug log
+    console.log("Alpine started");
 });
