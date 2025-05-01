@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // Get the Lottie URL from query params or use default
             this.lottieUrl =
                 urlParams.get("lottie") ||
-                "https://lottie.host/9e0475c4-a6ea-46bf-b27c-8f8c3e14dc9a/AJTA2WRbpB.json";
+                "https://cdn.zenhalab.com/assets/structured/lottie_clap_animation.json";
 
             this.bgColor = urlParams.get("bgcolor") || "#ffffff";
-            this.imageUrl = urlParams.get("imageurl") || "";
+            this.imageUrl = urlParams.get("imageurl") || "https://cdn.zenhalab.com/assets/images/landscape-placeholder.jpeg";
             this.svgUrl = urlParams.get("svgurl") || "";
 
             console.log("Image URL:", this.imageUrl);
