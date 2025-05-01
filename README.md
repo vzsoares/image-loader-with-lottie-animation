@@ -1,63 +1,52 @@
-# ⏱️ Chess Clock Timer
+# 🎬 Image Loader with Lottie Animation
 
 ![Language](https://img.shields.io/badge/language-TypeScript%20%7C%20AlpineJS-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 
-A customizable chess clock and timer application for tracking game time. Perfect for chess players of all levels who need a reliable, easy-to-use timer with flexible time control options.
-
-## 📱 Preview
-
-### Desktop View
-
-![Desktop Preview](./public/preview_desktop.png)
-
-### Mobile View
-
-<img alt="Mobile Preview" src="./public/preview_mobile.png" width="400px"/>
+A customizable image loader application with smooth Lottie animations and SVG background patterns. Perfect for enhancing user experience during image loading on websites and web applications.
 
 ## ✨ Features
 
-- **Multiple Time Control Modes**: Support for various chess time formats (classical, rapid, blitz, etc.)
-- **Customizable Settings**: Adjust time, increment, and delay settings to your preference
-- **Responsive Design**: Works seamlessly on desktops, tablets, and mobile devices
-- **Simple Interface**: Easy-to-use controls designed for minimal distraction during gameplay
-- **Visual & Audio Alerts**: Clear notifications when time is running low
+- **Lottie Animation**: Beautiful loading animations powered by dotLottie
+- **Configurable via URL Parameters**: Easily customize all aspects through URL parameters
+- **SVG Background Patterns**: Add optional SVG patterns as decorative backgrounds
+- **Minimum Loading Time**: Ensures smooth transitions even with fast-loading images
+- **Responsive Design**: Works seamlessly on all device sizes
 
 ## 🚀 Live Webapp
 
-Try it now: [Chess Clock Timer](https://vzsoares.github.io/chess-timer-clock/)
+Try it now: [Image Loader with Lottie Animation](https://vzsoares.github.io/image-loader/)
 
-## 🎮 How to Use
+## 🔧 URL Parameters
 
-1. **Configure Time Settings**:
+Customize the loader by adding these parameters to the URL:
 
-    - Set initial time for both players
-    - Choose increment or delay if desired
-    - Select any additional options
+- **lottie**: URL to a Lottie JSON animation file
+- **imageurl**: URL to the image you want to display after loading
+- **bgcolor**: Background color in hex format (e.g., `%23ffffff` for white)
+- **svgurl**: URL to an SVG file to use as a background pattern
 
-2. **Start the Clock**:
+### Example URL
 
-    - Press the start button or spacebar
-    - Tap your timer after making a move to switch to your opponent's time
+```
+https://vzsoares.github.io/image-loader/?lottie=https://lottie.host/9e0475c4-a6ea-46bf-b27c-8f8c3e14dc9a/AJTA2WRbpB.json&bgcolor=%23f5f5f5&imageurl=https://example.com/my-image.jpg&svgurl=https://example.com/pattern.svg
+```
 
-3. **During Play**:
+## 🎮 How It Works
 
-    - Pause/resume as needed
-    - Reset the clock for a new game
-    - Adjust settings at any time
+1. **Loading Phase**:
 
-### Desktop Controls
+    - Displays the Lottie animation while loading your image
+    - Applies the specified background color and pattern
+    - Ensures a minimum loading time for a smooth experience
 
-- **Space Bar**: Toggle player turn
-- **R Key**: Reset the clock
-- **Mouse Click**: Click on a player's side to switch to the other player's time
+2. **Transition**:
 
-### Mobile Controls
+    - Smoothly fades from the animation to the loaded image
 
-- **Tap**: Tap on a player's timer area to switch to the other player's time
-- **Control Buttons**: Use on-screen buttons for start, pause, and reset functions
-- **Rotate Device**: Turn your device vertically for optimal viewing experience
+3. **Final Display**:
+    - Shows your image with the configured background
 
 ## 🔧 Development
 
@@ -70,8 +59,8 @@ Try it now: [Chess Clock Timer](https://vzsoares.github.io/chess-timer-clock/)
 
 ```bash
 # 1. Clone the repository:
-git clone https://github.com/vzsoares/chess-timer-clock.git
-cd chess-clock-timer
+git clone https://github.com/vzsoares/image-loader.git
+cd image-loader
 
 # 2. Install dependencies:
 yarn install
@@ -87,6 +76,7 @@ yarn build
 
 - **TypeScript**: For type-safe code
 - **Alpine.js**: Lightweight JavaScript framework for reactivity
+- **dotLottie**: Official LottieFiles dotLottie player
 - **TailwindCSS**: Utility-first CSS framework
 - **Vite**: Next-generation frontend tooling
 

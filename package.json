@@ -1,27 +1,26 @@
 {
-    "name": "chess-clock-timer",
+    "name": "image-loader-with-lottie",
     "version": "1.0.0",
-    "description": "A customizable chess clock and timer application for tracking game time",
+    "description": "A simple image loader with Lottie animations and SVG background patterns",
     "scripts": {
         "dev": "vite",
-        "build": "vite build --base='/chess-timer-clock'",
-        "preview": "vite preview",
-        "test": "jest"
+        "build": "vite build --base='/image-loader'",
+        "preview": "vite preview"
     },
     "keywords": [
-        "chess",
-        "clock",
-        "timer",
-        "game",
-        "time-control",
-        "chess-clock",
+        "image",
+        "loader",
+        "lottie",
+        "animation",
+        "svg",
+        "background",
         "web-app"
     ],
     "author": "vzsoares",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/vzsoares/chess-clock-timer.git"
+        "url": "https://github.com/vzsoares/image-loader-with-lottie.git"
     },
     "devDependencies": {
         "@tailwindcss/postcss": "^4.0.13",
